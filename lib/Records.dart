@@ -8,6 +8,7 @@ class Records {
 
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
+    print(directory.path.toString());
     return directory.path;
   }
 
@@ -45,7 +46,9 @@ class Records {
     return file;
   }
 
-  String formatOutRecord(List<String> recordData) => recordData.join('\n');
+  String formatOutRecord(List<String> recordData) { recordData.join('\n');
+    print(recordData);
+  }
 
   List<List<String>> returnProcessedData() {
     this.readRecords();

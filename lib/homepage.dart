@@ -62,14 +62,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   navigateAndDisplay(BuildContext context) async {
-    var result = await Navigator.push(
+    List<String> result = await Navigator.push(
         context, MaterialPageRoute(builder: (context) => NewMeeting()));
-    recordData.writeRecords(recordData.formatOutRecord(result));
-
+    var abc = recordData.formatOutRecord(result);
+    recordData.writeRecords(abc);
     setState(() {
       nameData.add(result[0]);
       urlData.add(result[1]);
-      print("OK");
     });
   }
 }
