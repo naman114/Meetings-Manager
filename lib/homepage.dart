@@ -11,11 +11,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Records recordData = Records();
-  var allData, nameData, urlData;
+  List<List<String>> allData;
+  List<String> nameData, urlData;
   _HomePageState() {
-    allData = recordData.formattedReadRecords(recordData.readRecords());
-    nameData = allData[0];
-    urlData = allData[1];
+    allData = recordData.returnProcessedData();
+    if (allData != null) {
+      nameData = allData[0];
+      urlData = allData[1];
+    }
   }
 
   @override
@@ -37,7 +40,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Expanded(
                 child: ListView.builder(
-              itemCount: nameData.length,
+              itemCount: nameData != null ? nameData.length:0 ,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   title: Text(nameData[index],

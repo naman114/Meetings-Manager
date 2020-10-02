@@ -1,7 +1,13 @@
 import 'Dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter/foundation.dart';
+import 'Dart:core';
 
 class Records {
+  
+  List<List<String>> processedData;
+
+  
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
     return directory.path;
@@ -12,10 +18,11 @@ class Records {
     return File("$path/meetingRecords.txt");
   }
 
-  dynamic readRecords() async {
+  Future<List<String>> readRecords() async {
     try {
       final file = await _localFile;
-      var contents = await file.readAsLines();
+      List<String> contents = await file.readAsLines();
+      this.processedData = this.formattedReadRecords(contents);
       return contents;
     } catch (e) {
       return null;
@@ -40,4 +47,9 @@ class Records {
   }
 
   String formatOutRecord(List<String> recordData) => recordData.join('\n');
+  
+  List<List<String>> returnProcessedData() {
+    this.readRecords();
+    return this.processedData;
+  }
 }
