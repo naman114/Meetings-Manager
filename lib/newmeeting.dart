@@ -1,5 +1,6 @@
 import 'package:MeetingsManager/main.dart';
 import 'package:flutter/material.dart';
+import 'Records.dart';
 
 class NewMeeting extends StatefulWidget {
   @override
@@ -8,8 +9,9 @@ class NewMeeting extends StatefulWidget {
 
 class _NewMeetingState extends State<NewMeeting> {
   String _name;
-
   String _url;
+
+  Records newRecord = Records();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -18,9 +20,8 @@ class _NewMeetingState extends State<NewMeeting> {
       decoration: InputDecoration(labelText: "Enter name"),
       keyboardType: TextInputType.name,
       validator: (String value) {
-        if (value.isEmpty) {
+        if (value.isEmpty)
           return 'Name is required';
-        }
         return null;
       },
       onSaved: (String value) {
@@ -34,9 +35,8 @@ class _NewMeetingState extends State<NewMeeting> {
       decoration: InputDecoration(labelText: "Enter URL"),
       keyboardType: TextInputType.url,
       validator: (String value) {
-        if (value.isEmpty) {
+        if (value.isEmpty)
           return 'URL is required';
-        }
         return null;
       },
       onSaved: (String value) {
@@ -49,6 +49,7 @@ class _NewMeetingState extends State<NewMeeting> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -60,14 +61,14 @@ class _NewMeetingState extends State<NewMeeting> {
           IconButton(
             icon: Icon(Icons.done),
             onPressed: () {
-              if (!_formKey.currentState.validate()) {
+              if (!_formKey.currentState.validate())
                 return;
-              }
               _formKey.currentState.save();
               //at this point onSaved methods are called for the fields
-
               print(_name);
               print(_url);
+              List<String> createdRecord = [_name, _url];
+              newRecord.writeRecords(newRecord.formatOutRecord(createdRecord));
             },
           ),
         ],

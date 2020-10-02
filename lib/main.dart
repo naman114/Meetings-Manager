@@ -5,9 +5,8 @@ import 'homepage.dart';
 const Color myBlue = Colors.blue;
 const Color myWhite = Colors.white;
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
+
 
 class MyApp extends StatelessWidget {
   @override
