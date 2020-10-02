@@ -14,7 +14,7 @@ class Records {
     return File("$path/meetingRecords.txt");
   }
 
-  Future<List<String>> readRecords() async {
+  dynamic readRecords() async {
     try{
       final file = await _localFile;
       var contents = await file.readAsLines();
@@ -24,14 +24,7 @@ class Records {
     }
   }
 
-  Future<File> writeRecords(String data) async {
-    final file = await _localFile;
-    return file.writeAsString("$data", mode: FileMode.append);
-  }
-
-  String formatOutRecord (List<String> recordData) => recordData.join('\n');
-
-  List<List<String>> formattedReadRecords (List <String> readRecords){
+  List<List<String>> formattedReadRecords (List<String> readRecords){
     List<String> _names, _urls;
     List<List<String>> _formattedRecords = [_names, _urls];
     for (int i=0; i < readRecords.length;){
@@ -42,4 +35,12 @@ class Records {
     }
     return _formattedRecords;
   }
+
+  Future<File> writeRecords(String data) async {
+    final file = await _localFile;
+    return file.writeAsString("$data", mode: FileMode.append);
+  }
+
+  String formatOutRecord (List<String> recordData) => recordData.join('\n');
 }
+
