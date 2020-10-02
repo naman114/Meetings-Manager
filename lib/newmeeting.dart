@@ -69,7 +69,7 @@ class _NewMeetingState extends State<NewMeeting> {
               print(_name);
               print(_url);
 
-              var details = new List();
+              var details = new List(2);
               details[0] = _name;
               details[1] = _url;
               Navigator.pop(context, details);

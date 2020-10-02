@@ -4,10 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'Dart:core';
 
 class Records {
-  
   List<List<String>> processedData;
 
-  
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
     return directory.path;
@@ -43,11 +41,12 @@ class Records {
 
   Future<File> writeRecords(String data) async {
     final file = await _localFile;
-    return file.writeAsString("$data", mode: FileMode.append);
+    file.writeAsString("$data", mode: FileMode.append);
+    return file;
   }
 
   String formatOutRecord(List<String> recordData) => recordData.join('\n');
-  
+
   List<List<String>> returnProcessedData() {
     this.readRecords();
     return this.processedData;

@@ -12,7 +12,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Records recordData = Records();
   List<List<String>> allData;
-  List<String> nameData, urlData;
+  List<String> nameData = List<String>();
+  List<String> urlData = List<String>();
   _HomePageState() {
     allData = recordData.returnProcessedData();
     if (allData != null) {
@@ -40,7 +41,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Expanded(
                 child: ListView.builder(
-              itemCount: nameData != null ? nameData.length:0 ,
+              itemCount: nameData != null ? nameData.length : 0,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   title: Text(nameData[index],
@@ -61,10 +62,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   navigateAndDisplay(BuildContext context) async {
-    final result = await Navigator.push(
+    var result = await Navigator.push(
         context, MaterialPageRoute(builder: (context) => NewMeeting()));
+    recordData.writeRecords(recordData.formatOutRecord(result));
 
-    nameData.add(result[0]);
-    urlData.add(result[1]);
+    setState(() {
+      nameData.add(result[0]);
+      urlData.add(result[1]);
+      print("OK");
+    });
   }
 }
