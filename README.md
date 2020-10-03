@@ -1,6 +1,8 @@
 # MeetingsManager
 
-A new Flutter project.
+An application which will automate the process of joining online meetings.
+
+This project was made under the Hackfinity Hackathon 2020 organised by IOSD.
 
 ## Getting Started
 
